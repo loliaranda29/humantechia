@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-primary: #6366f1;
+  --color-secondary: #10b981;
+  --color-accent: #0ea5e9;
+  --color-dark: #1e293b;
+  --color-darker: #0f172a;
+}
+
+@layer base {
+  :root {
+    --primary: #6366f1;
+    --secondary: #10b981;
+    --accent: #0ea5e9;
+    --dark: #1e293b;
+    --darker: #0f172a;
+  }
+  
+  body {
+    @apply bg-dark text-white font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)];
+  }
+
+  .bg-gradient-main {
+    @apply bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#111827];
+  }
+}

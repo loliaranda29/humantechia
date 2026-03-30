@@ -1,0 +1,5 @@
+{
+  "name": "MailBlast Pro",
+  "description": "Plataforma para envío de correos masivos personalizados con adjuntos, usando dominio propio.",
+  "requestFramePermissions": []
+}

@@ -1,258 +1,332 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Terminal, Users, Briefcase, Calculator, Mail, MessageCircle, ArrowRight, ChevronRight, CheckCircle, Instagram, Linkedin } from 'lucide-react';
+import {
+  Users, Briefcase, Calculator, Zap, Code2, Globe,
+  ArrowRight, CheckCircle, ChevronRight, MapPin, Layers, BarChart3,
+} from 'lucide-react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import logo from '../logo.png';
-
-const colors = {
-  primary: '#6366f1',
-  secondary: '#10b981',
-  dark: '#1e293b',
-  accent: '#0ea5e9',
-};
 
 const services = [
   {
-    title: 'Innovación y Transformación Digital',
-    description: 'Automatización de procesos, consultoría en IA y desarrollo de plataformas a medida.',
-    icon: <Terminal className="w-8 h-8" />,
-    items: ['Automatización con n8n', 'Integración de Gemini/OpenAI', 'Sistemas Cloud'],
+    icon: <Users className="w-7 h-7" />,
+    title: 'Búsqueda de Personal',
+    desc: 'Encontramos el talento ideal con IA y criterio humano. Headhunting regional para cada posición.',
+    href: '/busqueda-de-personal',
+    color: 'from-emerald-500/20 to-emerald-500/5',
+    iconColor: 'text-emerald-400 bg-emerald-400/10',
   },
   {
-    title: 'Búsqueda y Selección de Personal',
-    description: 'Encontramos el talento ideal utilizando algoritmos de emparejamiento potenciados por IA.',
-    icon: <Users className="w-8 h-8" />,
-    items: ['Headhunting Regional', 'Evaluaciones con IA', 'Cultura Organizacional'],
-  },
-  {
+    icon: <Briefcase className="w-7 h-7" />,
     title: 'Tercerización de Personal',
-    description: 'Delega funciones operativas y enfócate en el núcleo de tu negocio.',
-    icon: <Briefcase className="w-8 h-8" />,
-    items: ['Outsourcing Comercial', 'Staffing Técnico', 'Gestión de Equipos'],
+    desc: 'Delegá funciones operativas y enfocá a tu equipo en lo que realmente hace crecer tu negocio.',
+    href: '/tercerizacion-personal-mendoza',
+    color: 'from-blue-500/20 to-blue-500/5',
+    iconColor: 'text-blue-400 bg-blue-400/10',
   },
   {
+    icon: <Calculator className="w-7 h-7" />,
     title: 'Payroll y Gestión Contable',
-    description: 'Cálculo y distribución de remuneraciones con total precisión tecnológica.',
-    icon: <Calculator className="w-8 h-8" />,
-    items: ['Liquidación de Impuestos', 'Retenciones Legales', 'Auditoría Digital'],
+    desc: 'Liquidaciones sin errores, cierres de mes tranquilos. Cumplimiento con AFIP garantizado.',
+    href: '/payroll-contable-mendoza',
+    color: 'from-amber-500/20 to-amber-500/5',
+    iconColor: 'text-amber-400 bg-amber-400/10',
   },
+  {
+    icon: <Zap className="w-7 h-7" />,
+    title: 'Automatizaciones con n8n',
+    desc: 'Conectamos tus sistemas y eliminamos tareas repetitivas. Tu operación corre sola.',
+    href: '/automatizaciones-n8n',
+    color: 'from-purple-500/20 to-purple-500/5',
+    iconColor: 'text-purple-400 bg-purple-400/10',
+  },
+  {
+    icon: <Code2 className="w-7 h-7" />,
+    title: 'Software a medida',
+    desc: 'Sistemas que se adaptan a tu operativa, no al revés. Código que es tuyo para siempre.',
+    href: '/software-a-medida',
+    color: 'from-rose-500/20 to-rose-500/5',
+    iconColor: 'text-rose-400 bg-rose-400/10',
+  },
+  {
+    icon: <Globe className="w-7 h-7" />,
+    title: 'Desarrollo Web',
+    desc: 'Sitios que convierten y posicionan en Google. Mobile-first, rápidos y optimizados para SEO.',
+    href: '/desarrollo-web-profesional',
+    color: 'from-indigo-500/20 to-indigo-500/5',
+    iconColor: 'text-indigo-400 bg-indigo-400/10',
+  },
+];
+
+const stats = [
+  { value: '6+', label: 'Servicios especializados' },
+  { value: '100%', label: 'Ejecución local en Mendoza' },
+  { value: '24hs', label: 'Tiempo de respuesta' },
+  { value: 'IA', label: 'Potenciado con tecnología' },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-main">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="Humantechia Logo" className="h-12 w-auto" />
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#servicios" className="text-sm font-medium hover:text-primary transition-colors">Servicios</a>
-            <a href="#empresa" className="text-sm font-medium hover:text-primary transition-colors">Nosotros</a>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=soporte@humantechia.com" target="_blank" rel="noopener noreferrer" className="bg-primary hover:bg-opacity-80 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-primary/30">
-              Contáctanos
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="grid lg:grid-cols-2 gap-16 items-center"
-          >
-            <div className="space-y-8">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium"
-              >
-                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Expertos en Tecnología y Talento Humano en Latam
-              </motion.div>
-              <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                Lideramos la <span className="text-gradient">Comunicación Digital</span> con Humantechia
-              </h1>
-              <p className="text-xl text-neutral-400 max-w-lg leading-relaxed">
-                En Humantechia combinamos innovación tecnológica, automatización de envíos y gestión de campañas para potenciar el crecimiento de tu empresa.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=soporte@humantechia.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white text-dark hover:bg-neutral-100 px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105">
-                  <Mail className="w-5 h-5" /> Consultar Servicios
-                </a>
-                <span
-                  className="flex items-center gap-2 border border-white/5 bg-white/5 backdrop-blur-sm text-neutral-500 px-8 py-4 rounded-full font-bold cursor-not-allowed"
-                  title="Próximamente"
-                >
-                  <MessageCircle className="w-5 h-5" /> WhatsApp Directo
-                </span>
-              </div>
+      {/* Hero */}
+      <section className="relative pt-40 pb-28 px-6 overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[120px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)' }} />
+
+        <div className="max-w-7xl mx-auto text-center relative">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-widest text-indigo-300"
+              style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.25)' }}>
+              <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+              Mendoza, Argentina · Tecnología Local
             </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/10 blur-[140px] rounded-full" />
-              <motion.div 
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative glass rounded-[2.5rem] p-8 border-white/10 shadow-2xl"
+            <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white mb-8 max-w-5xl mx-auto">
+              Talento, Procesos y Tecnología para{' '}
+              <span className="text-gradient">operar mejor</span>{' '}
+              y crecer con más control.
+            </h1>
+
+            <p className="text-xl lg:text-2xl text-neutral-400 max-w-3xl mx-auto leading-relaxed mb-12">
+              Unimos gestión de talento e innovación tecnológica local para resolver necesidades reales con rapidez y ejecución.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/contacto"
+                id="hero-cta-primary"
+                className="flex items-center gap-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-9 py-4 rounded-full text-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-indigo-600/30"
               >
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                  </div>
-                  <div className="text-xs text-neutral-500 font-mono tracking-widest uppercase">Panel de Control IA</div>
-                </div>
-                <div className="space-y-4">
-                  {[ 
-                    { label: 'Optimización Operativa', val: '98%', color: 'from-primary/50 to-primary' },
-                    { label: 'Retención de Talento', val: '95%', color: 'from-accent/50 to-accent' },
-                    { label: 'Eficacia en Selección', val: 'Alta', color: 'from-secondary/50 to-secondary' }
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-white/5 rounded-2xl p-4 flex items-center justify-between">
-                      <span className="text-sm font-medium text-neutral-400">{stat.label}</span>
-                      <div className="flex items-center gap-3">
-                        <div className={`h-1.5 w-16 rounded-full bg-gradient-to-r ${stat.color}`} />
-                        <span className="text-white font-bold font-mono">{stat.val}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                Cuéntanos qué necesitas <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                to="/blog"
+                id="hero-cta-secondary"
+                className="flex items-center gap-2 text-neutral-300 hover:text-white font-semibold px-6 py-4 transition-colors"
+              >
+                Ver nuestro Blog <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section id="servicios" className="py-24 px-6 relative">
+      {/* Stats Bar */}
+      <section className="py-12 px-6" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center space-y-4 mb-20">
-            <h2 className="text-3xl font-bold uppercase tracking-[0.2em] text-primary/80">Servicios Digitales y Humanos</h2>
-            <p className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">Soluciones para la Era de la IA</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((s, i) => (
-              <article
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((s, i) => (
+              <motion.div
                 key={i}
-                className="group relative p-8 glass rounded-3xl hover:border-primary/50 transition-all hover:shadow-2xl hover:shadow-primary/10"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
               >
-                <div className="inline-flex p-4 rounded-2xl bg-primary/10 text-primary mb-6 group-hover:scale-110 transition-transform">
-                  {s.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-4">{s.title}</h3>
-                <p className="text-neutral-400 text-sm mb-6 leading-relaxed">
-                  {s.description}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {s.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-xs font-medium text-neutral-300">
-                      <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="pt-4 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-primary text-xs font-bold tracking-widest uppercase flex items-center gap-2">
-                    Saber más <ChevronRight className="w-3 h-3" />
-                  </span>
-                </div>
-              </article>
+                <div className="text-3xl font-bold text-gradient mb-1">{s.value}</div>
+                <div className="text-sm text-neutral-500">{s.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section id="empresa" className="py-24 px-6 bg-white/5">
+      {/* Services Section */}
+      <section id="servicios" className="py-28 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl font-bold">Sobre <span className="text-primary">Nosotros</span></h2>
-              <p className="text-lg text-neutral-400 leading-relaxed">
-                En Humantechia, nos apasiona conectar el potencial humano con las herramientas tecnológicas más avanzadas. Nuestra misión es simplificar la complejidad digital para que las empresas puedan centrarse en lo que realmente importa: su gente y su crecimiento.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-6 glass rounded-2xl">
-                  <h4 className="text-2xl font-bold text-primary mb-2">100%</h4>
-                  <p className="text-sm text-neutral-500">Tecnología Cloud</p>
-                </div>
-                <div className="p-6 glass rounded-2xl">
-                  <h4 className="text-2xl font-bold text-primary mb-2">IA</h4>
-                  <p className="text-sm text-neutral-500">Empresa Innovadora</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative aspect-video glass rounded-[2.5rem] overflow-hidden">
-               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                 <img src={logo} alt="Humantechia Branding" className="w-1/2 opacity-50" />
-               </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">Lo que hacemos</p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Nuestras Soluciones</h2>
+            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+              Seis servicios complementarios que cubrían toda la operativa de tu empresa, desde el talento hasta la tecnología.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <Link
+                  to={s.href}
+                  className="group flex flex-col h-full p-8 rounded-3xl transition-all hover:border-indigo-500/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-600/10"
+                  style={{ background: `linear-gradient(135deg, ${s.color.split(' ')[0].replace('from-', '').replace('/', '')}, rgba(255,255,255,0.02))`.replace('from-', ''), border: '1px solid rgba(255,255,255,0.08)' }}
+                >
+                  <div className={`inline-flex p-3.5 rounded-2xl mb-6 w-fit ${s.iconColor} group-hover:scale-110 transition-transform`}>
+                    {s.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed flex-1 mb-6">{s.desc}</p>
+                  <div className="flex items-center gap-2 text-sm font-semibold text-indigo-400 group-hover:text-indigo-300 transition-colors">
+                    Ver más <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="contacto" className="border-t border-white/5 pt-20 pb-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
-            <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <img src={logo} alt="Humantechia Logo" className="h-10 w-auto" />
+      {/* About / Trust Section - PAS Structure */}
+      <section id="empresa" className="py-32 px-6 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.01)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        {/* Background decorative glow */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-20"
+          style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%)' }} />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center mb-24">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-10"
+            >
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-[10px] font-bold uppercase tracking-widest text-indigo-400"
+                  style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)' }}>
+                  Propósito Humantechia
+                </div>
+                <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-[1.15]">
+                  Líderes en gestión de talento y <span className="text-gradient">desarrollo de innovación tecnológica.</span>
+                </h2>
+                
+                {/* PAS - Problema/Agitación */}
+                <div className="p-8 rounded-3xl mb-8" style={{ background: 'rgba(239,68,68,0.03)', border: '1px solid rgba(239,68,68,0.08)' }}>
+                  <p className="text-lg text-neutral-400 leading-relaxed italic">
+                    "Combinamos innovación, talento humano y desarrollo para operar mejor y crecer con más control. En Humantechia nacimos para combinar todos los servicios en una solución integral que rompa el ciclo de la improvisación."
+                  </p>
+                </div>
+
+                {/* PAS - Solución */}
+                <p className="text-xl text-white font-medium leading-relaxed mb-6">
+                  Sobre nosotros: Somos + Talento, + Humano. Somos el puente entre la gestión de personas y la vanguardia tecnológica local.
+                </p>
+                
+                <p className="text-lg text-indigo-300 font-semibold mb-10">
+                  Tecnología cuando acelera. Criterio humano cuando importa decidir bien.
+                </p>
               </div>
-              <p className="text-sm text-neutral-500 leading-relaxed">
-                Optimizando la comunicación masiva mediante la integración de tecnología avanzada y automatización inteligente.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Servicios</h4>
-              <ul className="space-y-4 text-sm text-neutral-500">
-                <li><a href="#servicios" className="hover:text-primary transition-colors">Innovación Digital</a></li>
-                <li><a href="#servicios" className="hover:text-primary transition-colors">Selección IA</a></li>
-                <li><a href="#servicios" className="hover:text-primary transition-colors">Payroll</a></li>
-                <li><a href="#servicios" className="hover:text-primary transition-colors">Tercerización</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Compañía</h4>
-              <ul className="space-y-4 text-sm text-neutral-500">
-                <li><a href="#empresa" className="hover:text-primary transition-colors">Sobre Nosotros</a></li>
-                <li><a href="#contacto" className="hover:text-primary transition-colors">Términos y Condiciones</a></li>
-                <li><a href="#contacto" className="hover:text-primary transition-colors">Política de Privacidad</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Contacto</h4>
-              <ul className="space-y-4 text-sm text-neutral-500">
-                <li className="flex items-center gap-2">
-                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=soporte@humantechia.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <Mail className="w-4 h-4" /> soporte@humantechia.com
-                  </a>
-                </li>
-                <li className="flex items-center gap-2 opacity-40 cursor-not-allowed" title="Próximamente">
-                  <MessageCircle className="w-4 h-4" /> WhatsApp Corporativo
-                </li>
-                <li className="flex items-center gap-4 pt-2">
-                  <a href="https://www.instagram.com/humantechia_" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-primary/20 text-neutral-400 hover:text-white transition-all">
-                    <Instagram className="w-5 h-5" />
-                  </a>
-                  <a href="https://www.linkedin.com/company/humantechia" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-primary/20 text-neutral-400 hover:text-white transition-all">
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+              <Link
+                to="/contacto"
+                className="inline-flex items-center gap-2.5 bg-white/5 hover:bg-white/10 text-white font-bold px-8 py-4 rounded-full border border-white/10 transition-all hover:scale-105 active:scale-95"
+              >
+                Conocé al equipo <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="absolute inset-0 rounded-[4rem] blur-[100px]"
+                style={{ background: 'radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%)' }} />
+              <div className="relative p-16 rounded-[4rem] flex items-center justify-center overflow-hidden"
+                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(99,102,241,0.15)', aspectRatio: '1/1' }}>
+                <img src={logo} alt="Humantechia" className="w-3/4 relative z-10" />
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+              </div>
+            </motion.div>
           </div>
-          <div className="pt-8 border-t border-white/5 text-center text-neutral-600 text-xs">
-            <p>© {new Date().getFullYear()} Humantechia. Todos los derechos reservados.</p>
+
+          {/* Pillars Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <Zap className="w-6 h-6" />,
+                title: 'Innovación',
+                desc: 'Usamos n8n, IA y software a medida para que tu equipo deje de ser esclavo de las tareas repetitivas.'
+              },
+              {
+                icon: <Users className="w-6 h-6" />,
+                title: 'Talento Tercerizado',
+                desc: 'Nuestro equipo de selección es el encargado de buscar el personal ideal para tu rubro específico.'
+              },
+              {
+                icon: <MapPin className="w-6 h-6" />,
+                title: 'ADN Local',
+                desc: 'Conocemos Mendoza y Cuyo. No hablamos desde una oficina lejana, operamos donde vos operás.'
+              },
+              {
+                icon: <BarChart3 className="w-6 h-6" />,
+                title: 'Resultados Reales',
+                desc: 'Entregamos soluciones que se ven reflejadas en tu rentabilidad operativa y en tu tranquilidad diaria.'
+              }
+            ].map((pillar, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-8 rounded-3xl group hover:border-indigo-500/40 transition-all relative overflow-hidden"
+                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                {/* Glow effect requested: "card -> luz de fondo" */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  style={{ background: 'radial-gradient(circle at center, rgba(99,102,241,0.05) 0%, transparent 70%)' }} />
+                
+                <div className="relative z-10">
+                  <div className="inline-flex p-3 rounded-2xl bg-indigo-600/10 text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
+                    {pillar.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-4">{pillar.title}</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed">{pillar.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="p-12 rounded-[2.5rem]"
+            style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(16,185,129,0.1))', border: '1px solid rgba(99,102,241,0.2)' }}
+          >
+            <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">Sin compromiso</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+              ¿Listo para operar mejor?
+            </h2>
+            <p className="text-lg text-neutral-400 mb-10 max-w-xl mx-auto">
+              Contanos tu desafío y en menos de 24 horas un especialista de Humantechia te propone cómo resolverlo.
+            </p>
+            <Link
+              to="/contacto"
+              id="cta-banner-btn"
+              className="inline-flex items-center gap-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-10 py-4 rounded-full text-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-indigo-600/30"
+            >
+              Cuéntanos qué necesitas <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }

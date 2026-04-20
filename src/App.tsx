@@ -4,6 +4,15 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import BusquedaPersonal from './pages/BusquedaPersonal';
+import TercerizacionPersonal from './pages/TercerizacionPersonal';
+import PayrollContable from './pages/PayrollContable';
+import AutomatizacionesN8n from './pages/AutomatizacionesN8n';
+import SoftwareMedida from './pages/SoftwareMedida';
+import DesarrolloWeb from './pages/DesarrolloWeb';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import Contacto from './pages/Contacto';
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
@@ -26,6 +35,19 @@ export default function App() {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
 
+          {/* Service Pages */}
+          <Route path="/busqueda-de-personal" element={<BusquedaPersonal />} />
+          <Route path="/tercerizacion-personal-mendoza" element={<TercerizacionPersonal />} />
+          <Route path="/payroll-contable-mendoza" element={<PayrollContable />} />
+          <Route path="/automatizaciones-n8n" element={<AutomatizacionesN8n />} />
+          <Route path="/software-a-medida" element={<SoftwareMedida />} />
+          <Route path="/desarrollo-web-profesional" element={<DesarrolloWeb />} />
+
+          {/* Blog & Contact */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/contacto" element={<Contacto />} />
+
           {/* Admin Routes */}
           <Route path="/admin" element={<Login />} />
           <Route
@@ -37,7 +59,7 @@ export default function App() {
             }
           />
 
-          {/* 404 - Redirect to Home */}
+          {/* 404 – Redirect to Home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
